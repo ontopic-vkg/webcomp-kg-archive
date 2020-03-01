@@ -1,0 +1,27 @@
+{
+  "title": "Webcomponent KG",
+  "description": "A webcomponent for showing info from a Knowledge Graph",
+  "descriptionAbstract": "A webcomponent for KG",
+  "license": "Apache-2.0",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-boilerplate",
+  "authors": [
+    {
+      "name": "Guohui Xiao",
+      "email": "guohui.xiao@ontopic.biz",
+      "organization": "Ontopic s.r.l.",
+      "organizationUrl": "https://ontop-vkg.org"
+    }
+  ],
+  "image": null,
+  "searchTags": [],
+  "dist": {
+    "basePath": "dist",
+    "files": [
+      "app.min.js"
+    ]
+  },
+  "configuration": {
+    "tagName": "webcomponent-boilerplate",
+    "options": []
+  }
+}
