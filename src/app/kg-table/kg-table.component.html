@@ -1,34 +1,21 @@
-<div *ngIf="formSubmitted; else formEntry">
-
-  <table>
-    <tr>
-      <td *ngFor="let varName of results.head.vars">{{varName}}</td>
-    </tr>
-    <tr *ngFor="let mapping of results.results.bindings">
-      <td *ngFor="let varName of results.head.vars">{{mapping[varName]?.value}}</td>
-    </tr>
-  </table>
+<div *ngIf="!finished">
+  Loading...
 </div>
 
-<ng-template #formEntry>
-  <h4>{{ signupTitle }}</h4>
-  <p>Get cool news and tips on the latest blockchain Angular-powered AI 5G stuff</p>
-  <form (ngSubmit)="onSubmit()" #emailForm="ngForm">
-    <div>
-      <label>Name:</label>
-      <input type="text" name="name" [(ngModel)]="formData.name">
-    </div>
-    <div>
-      <label>Email:</label>
-      <input type="text" name="email" [(ngModel)]="formData.email">
-    </div>
-    <div>
-      <label>SPARQL Query
-        <textarea name="query" [(ngModel)]="formData.query"></textarea>
-      </label>
-    </div>
-    <div>
-      <button type="submit" [disabled]="!emailForm.form.valid">Sign up!</button>
-    </div>
-  </form>
-</ng-template>
+<div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="results">
+    <table>
+      <tr>
+        <th *ngFor="let varName of results.head.vars">{{varName}}</th>
+      </tr>
+      <tr *ngFor="let mapping of results.results.bindings">
+        <td *ngFor="let varName of results.head.vars">
+          {{mapping[varName]?.value}}
+        </td>
+      </tr>
+    </table>
+</div>
+
