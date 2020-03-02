@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {SparqlService} from "../sparql.service";
 import {Observable} from "rxjs";
-import {SelectResults} from "../../model/SelectResults";
+import {SelectResultSet} from "../../model/sparql";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,7 +17,7 @@ export class KgTableComponent implements OnInit {
 
   @Input() query: string;
 
-  results: SelectResults;
+  results: SelectResultSet;
 
   finished: boolean = false;
 
@@ -27,7 +27,7 @@ export class KgTableComponent implements OnInit {
 
     this.sparqlService.endpoint = this.endpoint;
 
-    const results: Observable<SelectResults> = this.sparqlService.select(this.query);
+    const results: Observable<SelectResultSet> = this.sparqlService.select(this.query);
     results.subscribe(value => {
       this.finished = true;
       this.results = value;

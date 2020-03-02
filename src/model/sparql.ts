@@ -30,7 +30,7 @@ export type RdfTerm = IRI | Literal | BlankNode
 
 export type SolutionMapping = Record<string, RdfTerm>
 
-export interface SelectResults {
+export interface SelectResultSet {
   head: {
     vars: string[]
   },

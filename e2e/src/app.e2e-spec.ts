@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('angular-web-component app is running!');
+    expect(page.getTitleText()).toEqual('webcomp-kg app is running!');
   });
 
   afterEach(async () => {

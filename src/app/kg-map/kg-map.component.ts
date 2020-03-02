@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SelectResults} from "../../model/SelectResults";
+import {SelectResultSet} from "../../model/sparql";
 import {SparqlService} from "../sparql.service";
 import {Observable} from "rxjs";
 
@@ -27,7 +27,7 @@ export class KgMapComponent implements OnInit {
 
   @Input() query: string;
 
-  results: SelectResults;
+  results: SelectResultSet;
 
   finished: boolean = false;
 
@@ -36,7 +36,24 @@ export class KgMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const overlay = KgMapComponent.createMap();
 
+    this.sparqlService.endpoint = this.endpoint;
+    this.sparqlService.select(this.query)
+      .subscribe(value => {
+        this.finished = true;
+        this.results = value;
+        const features = this.sparqlService.asFeatures(value);
+        console.log(features);
+        overlay.getSource().addFeatures(features);
+      }, error => {
+        this.finished = true;
+        this.errorMessage = JSON.stringify(error);
+      });
+
+  }
+
+  private static createMap() {
     useGeographic();
 
     // bolzano
@@ -66,7 +83,7 @@ export class KgMapComponent implements OnInit {
         }),
         overlay
       ],
-      interactions:  [
+      interactions: [
         new DragPan(),
       ],
       controls: [
@@ -76,22 +93,6 @@ export class KgMapComponent implements OnInit {
         new FullScreen()
       ]
     });
-
-    this.sparqlService.endpoint = this.endpoint;
-
-    const results: Observable<SelectResults> = this.sparqlService.select(this.query);
-
-    results.subscribe(value => {
-      this.finished = true;
-      this.results = value;
-      const features = this.sparqlService.asFeatures(value);
-      console.log(features);
-      overlay.getSource().addFeatures(features);
-    }, error => {
-      this.finished = true;
-      this.errorMessage = JSON.stringify(error);
-    });
-
+    return overlay;
   }
-
 }

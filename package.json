@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod && cat dist/angular-web-component/runtime-es2015*.js dist/angular-web-component/polyfills-es2015*.js dist/angular-web-component/main-es2015*.js > example/kg-table.js && cp dist/angular-web-component/styles.3ff695c00d717f2d2a11.css example/kg-table.css",
+    "build": "ng build --prod && cat dist/webcomp-kg/runtime-es2015*.js dist/webcomp-kg/polyfills-es2015*.js dist/webcomp-kg/main-es2015*.js > example/webcomp-kg.js && cp dist/webcomp-kg/styles.3ff695c00d717f2d2a11.css example/webcomp-kg.css",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
