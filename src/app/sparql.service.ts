@@ -5,7 +5,9 @@ import {SelectResultSet, SolutionMapping, TypedLiteral} from "../model/sparql";
 import WKT from 'ol/format/WKT';
 import {Feature} from "ol";
 import {Observable} from "rxjs";
+import {Circle, Fill, Style} from "ol/style";
 
+import {colorFromString} from "./color-util";
 
 @Injectable({
   providedIn: 'root'
@@ -51,14 +53,23 @@ export class SparqlService {
       }
     }
 
+    let labelVar = wktVar + "Label";
+    let colorVar = wktVar + "Color";
+
     const wktFormat = new WKT();
 
     return solutionMappings
       .map((m: SolutionMapping) => {
         const wkt: string = m[wktVar].value;
         const feature: Feature = wktFormat.readFeature(wkt);
-        // if (m[labelVar])
-        //   feature.set("label", m[labelVar].value);
+        if (m[colorVar]) {
+          feature.setStyle(new Style({
+            image: new Circle({
+              radius: 4,
+              fill: new Fill({color: colorFromString(m[colorVar].value)})
+            })
+          }));
+        }
         return feature;
       });
   }

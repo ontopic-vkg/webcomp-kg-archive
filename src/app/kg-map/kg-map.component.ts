@@ -44,7 +44,7 @@ export class KgMapComponent implements OnInit {
         this.finished = true;
         this.results = value;
         const features = this.sparqlService.asFeatures(value);
-        console.log(features);
+        //console.log(features);
         overlay.getSource().addFeatures(features);
       }, error => {
         this.finished = true;
