@@ -13,26 +13,19 @@ export class KgTableComponent implements OnInit {
 
   @Input() endpoint: string;
 
-  @Input() signupTitle = 'Sign up for our newsletter';
   @Input() errorMessage = '';
 
   @Input() query: string;
 
   results: SelectResults;
 
-  formSubmitted = false;
   finished: boolean = false;
 
-  constructor(private sparqlService: SparqlService, private el: ElementRef) {
-
-  }
+  constructor(private sparqlService: SparqlService) {}
 
   ngOnInit(): void {
 
     this.sparqlService.endpoint = this.endpoint;
-
-    // let myCurrentContent:string = this.el.nativeElement.innerHTML;
-    // console.log(myCurrentContent)
 
     const results: Observable<SelectResults> = this.sparqlService.select(this.query);
     results.subscribe(value => {

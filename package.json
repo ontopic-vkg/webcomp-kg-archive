@@ -20,7 +20,9 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@types/ol": "^6.1.0",
     "document-register-element": ">=1.7.2 <=1.8.1",
+    "ol": "^6.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

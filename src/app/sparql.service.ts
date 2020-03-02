@@ -1,6 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SelectResults} from "../model/SelectResults";
+import {SelectResults, SolutionMapping} from "../model/SelectResults";
+
+import WKT from 'ol/format/WKT';
+import {Feature} from "ol";
+import {Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +24,7 @@ export class SparqlService {
   constructor(private http: HttpClient) {
   }
 
-  select(sparql: string) {
+  select(sparql: string): Observable<SelectResults> {
     const requestBody = "query=" + encodeURIComponent(sparql) +
       "&Accept=" + encodeURIComponent('application/sparql-results+json');
     console.log(requestBody);
@@ -29,4 +34,20 @@ export class SparqlService {
       }),
     });
   }
+
+  asFeatures(results: SelectResults): Feature[] {
+    const wktVar = "pos";
+    const labelVar = "posLabel";
+    const wktFormat = new WKT();
+
+    return results.results.bindings
+      .map((m: SolutionMapping) => {
+        const wkt: string = m[wktVar].value;
+        const feature: Feature = wktFormat.readFeature(wkt);
+        if (m[labelVar])
+          feature.set("label", m[labelVar].value);
+        return feature;
+      });
+  }
+
 }
