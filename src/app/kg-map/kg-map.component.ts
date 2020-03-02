@@ -1,9 +1,11 @@
+import 'ol/ol.css';
+
 import {Component, Input, OnInit} from '@angular/core';
 import {SelectResultSet} from "../../model/sparql";
 import {SparqlService} from "../sparql.service";
 import {Observable} from "rxjs";
 
-import 'ol/ol.css';
+
 import {useGeographic} from 'ol/proj';
 import {Map, View} from 'ol';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
@@ -57,7 +59,7 @@ export class KgMapComponent implements OnInit {
     useGeographic();
 
     // bolzano
-    var place = [11.33982, 46.49067];
+    const place = [11.33982, 46.49067];
 
     const overlay = new VectorLayer({
       source: new VectorSource({
@@ -72,6 +74,9 @@ export class KgMapComponent implements OnInit {
     });
 
     var map = new Map({
+      interactions: defaultInteractions({
+        onFocusOnly: true
+      }),
       target: 'map',
       view: new View({
         center: place,
@@ -83,15 +88,15 @@ export class KgMapComponent implements OnInit {
         }),
         overlay
       ],
-      interactions: [
-        new DragPan(),
-      ],
-      controls: [
-        new OverviewMap(),
-        new Zoom(),
-        new MousePosition(),
-        new FullScreen()
-      ]
+      // interactions: [
+      //   new DragPan(),
+      // ],
+      // controls: [
+      //   new OverviewMap(),
+      //   new Zoom(),
+      //   new MousePosition(),
+      //   new FullScreen()
+      // ]
     });
     return overlay;
   }

@@ -29,7 +29,7 @@ export class SparqlService {
   select(sparql: string): Observable<SelectResultSet> {
     const requestBody = "query=" + encodeURIComponent(sparql) +
       "&Accept=" + encodeURIComponent('application/sparql-results+json');
-    console.log(requestBody);
+    //console.log(requestBody);
     return this.http.post<SelectResultSet>(this._endpoint, requestBody, {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
