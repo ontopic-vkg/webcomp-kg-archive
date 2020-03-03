@@ -1,5 +1,3 @@
-import 'ol/ol.css';
-
 import {Component, Input, OnInit} from '@angular/core';
 import {SelectResultSet} from "../../model/sparql";
 import {SparqlService} from "../sparql.service";
@@ -75,7 +73,8 @@ export class KgMapComponent implements OnInit {
 
     var map = new Map({
       interactions: defaultInteractions({
-        onFocusOnly: true
+        /* onFocusOnly caused trouble. It has to be disabled */
+        //onFocusOnly: true
       }),
       target: 'map',
       view: new View({
