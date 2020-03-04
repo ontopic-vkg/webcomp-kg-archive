@@ -2,10 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {SelectResultSet} from "../../model/sparql";
 import {SparqlService} from "../sparql.service";
 import {Observable} from "rxjs";
-
-
+import * as $ from "jquery";
 import {useGeographic} from 'ol/proj';
-import {Map, View} from 'ol';
+import {Map, Overlay, View} from 'ol';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
@@ -13,6 +12,11 @@ import VectorSource from 'ol/source/Vector';
 import {MousePosition, OverviewMap, Zoom, FullScreen} from "ol/control";
 import {Circle, Fill, Style} from "ol/style";
 import {defaults as defaultInteractions, DragPan} from 'ol/interaction';
+
+import 'bootstrap';
+import {Point} from "ol/geom";
+import OverlayPositioning from "ol/OverlayPositioning";
+
 
 @Component({
   selector: 'kg-map',
@@ -97,6 +101,55 @@ export class KgMapComponent implements OnInit {
       //   new FullScreen()
       // ]
     });
+
+    var element = document.getElementById('popup');
+
+    var popup = new Overlay({
+      element: element,
+      positioning: OverlayPositioning.CENTER_CENTER, //'bottom-center',
+      stopEvent: false,
+      offset: [0, -10]
+    });
+    map.addOverlay(popup);
+
+    function formatCoordinate(coordinate) {
+      return ("\n    <table>\n      <tbody>\n        <tr><th>lon</th><td>" + (coordinate[0].toFixed(2)) + "</td></tr>\n        <tr><th>lat</th><td>" + (coordinate[1].toFixed(2)) + "</td></tr>\n      </tbody>\n    </table>");
+    }
+
+    var info = document.getElementById('info');
+    map.on('moveend', function() {
+      var view = map.getView();
+      var center = view.getCenter();
+      info.innerHTML = formatCoordinate(center);
+    });
+
+    map.on('click', function(event) {
+      var feature = map.getFeaturesAtPixel(event.pixel)[0];
+      if (feature) {
+        var coordinate = (feature.getGeometry() as Point).getCoordinates();
+        popup.setPosition(coordinate);
+        console.log(formatCoordinate(coordinate));
+        ($(element) as any).popover({
+          placement: 'top',
+          title: feature.get('label'),
+          html: true,
+          content: formatCoordinate(coordinate)
+        });
+        ($(element) as any).popover('show');
+      } else {
+        ($(element) as any).popover('dispose');
+      }
+    });
+
+    map.on('pointermove', function(event) {
+      if (map.hasFeatureAtPixel(event.pixel)) {
+        map.getViewport().style.cursor = 'pointer';
+      } else {
+        map.getViewport().style.cursor = 'inherit';
+      }
+    });
+
+
     return overlay;
   }
 }

@@ -70,6 +70,11 @@ export class SparqlService {
             })
           }));
         }
+
+        if (m[labelVar]) {
+          feature.set('label', m[labelVar].value);
+        }
+
         return feature;
       });
   }
