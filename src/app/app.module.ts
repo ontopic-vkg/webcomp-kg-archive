@@ -7,10 +7,13 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {KgTableComponent} from './kg-table/kg-table.component';
 import { KgMapComponent } from './kg-map/kg-map.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSliderModule} from "@angular/material/slider";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [KgTableComponent, KgMapComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule],
   providers: [],
   entryComponents: [KgTableComponent, KgMapComponent]
 })

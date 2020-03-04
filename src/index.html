@@ -6,10 +6,12 @@
   <base href='/'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='icon' type='image/x-icon' href='favicon.ico'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<p>
-  <kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+<mat-tab-group>
+  <mat-tab label="First"> <kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -38,8 +40,8 @@
   }
   LIMIT 500"
   >
-  </kg-map>
-  <kg-table endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+  </kg-map> </mat-tab>
+  <mat-tab label="Second"> <kg-table endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -68,7 +70,11 @@
   }
   LIMIT 500"
   >
-  </kg-table>
-</p>
+  </kg-table> </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
+
+
+<!--</p>-->
 </body>
 </html>
