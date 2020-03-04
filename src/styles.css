@@ -2,4 +2,3 @@
 
 /* CSS of OpenLayers has to be imported globally, otherwise not working */
 @import '~ol/ol.css';
-@import '~bootstrap/dist/css/bootstrap.css';
