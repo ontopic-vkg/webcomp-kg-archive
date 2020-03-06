@@ -10,12 +10,13 @@ import { KgMapComponent } from './kg-map/kg-map.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatTableModule} from "@angular/material/table";
+import { KgGalleryComponent } from './kg-gallery/kg-gallery.component';
 
 @NgModule({
-  declarations: [KgTableComponent, KgMapComponent],
+  declarations: [KgTableComponent, KgMapComponent, KgGalleryComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule],
   providers: [],
-  entryComponents: [KgTableComponent, KgMapComponent]
+  entryComponents: [KgTableComponent, KgMapComponent, KgGalleryComponent]
 })
 export class AppModule {
   constructor(injector: Injector) {
@@ -24,6 +25,9 @@ export class AppModule {
 
     const mapEl = createCustomElement(KgMapComponent, {injector});
     customElements.define('kg-map', mapEl);
+
+    const galleryEl = createCustomElement(KgGalleryComponent, {injector});
+    customElements.define('kg-gallery', galleryEl);
   }
 
   ngDoBootstrap() {

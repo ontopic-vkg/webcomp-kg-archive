@@ -10,8 +10,24 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<mat-tab-group>
-  <mat-tab label="First"> <kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+<kg-gallery endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?img ?label ?pos
+WHERE {
+  ?s a schema:SkiResort ;
+     schema:name ?label ;
+     geo:asWKT ?pos ;
+     schema:geo [ schema:elevation ?maxElevation ] ;
+     schema:image ?img ;
+     schema:isPartOf ?skiRegion.
+  ?skiRegion a :SkiRegion ;
+     schema:name ?regionName.
+} "
+>
+</kg-gallery>
+<kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -40,8 +56,8 @@
   }
   LIMIT 500"
   >
-  </kg-map> </mat-tab>
-  <mat-tab label="Second"> <kg-table endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+  </kg-map>
+   <kg-table endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -70,9 +86,7 @@
   }
   LIMIT 500"
   >
-  </kg-table> </mat-tab>
-  <mat-tab label="Third"> Content 3 </mat-tab>
-</mat-tab-group>
+  </kg-table>
 
 
 <!--</p>-->
