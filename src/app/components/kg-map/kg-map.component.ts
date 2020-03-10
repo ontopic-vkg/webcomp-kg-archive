@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SelectResultSet} from "../../model/sparql";
-import {SparqlService} from "../sparql.service";
+
 import {Observable} from "rxjs";
 import {toLonLat, useGeographic} from 'ol/proj';
 import {Map, Overlay, View} from 'ol';
@@ -13,6 +12,8 @@ import {Circle, Fill, Style} from "ol/style";
 import {defaults as defaultInteractions, DragPan} from 'ol/interaction';
 
 import {Point} from "ol/geom";
+import {SparqlService} from "../../sparql.service";
+import {SelectResultSet} from "../../../model/sparql";
 
 
 

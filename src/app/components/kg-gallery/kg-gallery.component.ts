@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {SelectResultSet} from "../../model/sparql";
-import {SparqlService} from "../sparql.service";
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {SelectResultSet} from "../../../model/sparql";
+import {SparqlService} from "../../sparql.service";
 
 @Component({
   selector: 'kg-gallery',
   templateUrl: './kg-gallery.component.html',
-  styleUrls: ['./kg-gallery.component.css']
+  styleUrls: ['./kg-gallery.component.css'],
+  //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class KgGalleryComponent implements OnInit {
   @Input() endpoint: string;

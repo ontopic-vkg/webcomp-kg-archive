@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {SparqlService} from "../sparql.service";
+import {SparqlService} from "../../sparql.service";
 import {Observable} from "rxjs";
-import {SelectResultSet} from "../../model/sparql";
+import {SelectResultSet} from "../../../model/sparql";
 
 @Component({
   // tslint:disable-next-line:component-selector

@@ -1,14 +1,5 @@
-Replace all `ToDo` notes in this file and adjust also the following files:
-    - package.json:
-        - Adjust the general parts like name, description, ...
-        - Adjust the three scripts `npm run start`, `npm run build` and `npm run test`
-    - wcs-manifest.json:
-        - Adjust the general parts like title, description, ...
-        - Adjust the configuration part with all possible configuration options (https://webcomponents.opendatahub.bz.it/getting-started)
+# Web Components for Knowledge Graphs 
 
-# ToDo: Project Name
-
-ToDo: Description of the project.
 
 ## Table of contents
 
@@ -21,24 +12,61 @@ ToDo: Description of the project.
 
 ## Usage
 
-ToDo: Include the webcompscript file `dist/webcomp-boilerplate.min.js` in your HTML and define the web component like this:
+
+Include the webcompscript files `webcomp-kg.js` and `webcomp-kg.css`  in your HTML and define the web components like below. 
+Three Web Components `<kg-map>`, `<kg-gallery>`, and `<kg-table>` are defined. 
 
 ```html
-<webcomp-boilerplate xxx="test" yyy="2"></webcomp-boilerplate>
+<body>
+<script src="webcomp-kg.js"></script>
+  <link rel="stylesheet" href="webcomp-kg.css">
+<kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+    PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+    SELECT ?h ?pos ?posLabel ?posColor
+    WHERE {
+    ?h a schema:LodgingBusiness ;
+       geo:asWKT ?pos ;
+       schema:name ?posLabel ;
+       schema:address ?a .
+  FILTER (lang(?posLabel) = 'de')
+  # Colors
+  OPTIONAL {
+  ?h a schema:Campground .
+  BIND('chlorophyll,0.5' AS ?posColor) # Green
+  }
+  OPTIONAL {
+  ?h a schema:BedAndBreakfast .
+  BIND('viridis,0.1' AS ?posColor) # Purple
+  }
+  OPTIONAL {
+  ?h a schema:Hotel .
+  BIND('jet,0.3' AS ?posColor) # Light blue
+  }
+  OPTIONAL {
+  ?h a schema:Hostel .
+  BIND('jet,0.8' AS ?posColor) # Red
+  }
+  }
+  LIMIT 500"
+>
+</kg-map>
+</body>
 ```
+
+Two other We 
 
 ### Attributes
 
-#### xxxx
+#### endpoint
 
-The description of the parameter xxx.
+The SPARQL endpoint
 
 Type: string
-Options: "test", "123"
 
-#### yyy
 
-The description of the parameter yyy.
+#### query
+
+The SPARQL query
 
 Type: int
 
@@ -51,7 +79,6 @@ on your local machine for development and testing purposes.
 
 To build the project, the following prerequisites must be met:
 
-- ToDo: Check the prerequisites
 - Node 12 / NPM 6
 
 For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
@@ -61,13 +88,13 @@ For a ready to use Docker environment with all prerequisites already installed a
 Get a copy of the repository:
 
 ```bash
-ToDo: git clone https://github.com/noi-techpark/project-name.git
+ToDo: git clone https://github.com/ontopic-vkg/webcomp-kg.git
 ```
 
 Change directory:
 
 ```bash
-ToDo: cd project-name/
+cd webcomp-kg/
 ```
 
 ### Dependencies
@@ -86,7 +113,7 @@ Build and start the project:
 npm run start
 ```
 
-The application will be served and can be accessed at [http://localhost:8080](http://localhost:8080).
+The application will be served and can be accessed at [http://localhost:4200](http://localhost:4200).
 
 ## Tests and linting
 
@@ -155,7 +182,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-ToDo: For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
+For support, please contact [info@opendatahub.bz.it](mailto:info@opendatahub.bz.it).
 
 ### Contributing
 
@@ -181,4 +208,4 @@ The project uses this boilerplate: [https://github.com/noi-techpark/webcomp-boil
 
 ### License
 
-The code in this project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 license. See the [LICENSE.md](LICENSE.md) file for more information.
+The code in this project is licensed under the Apache 2 license. See the [LICENSE.md](LICENSE.md) file for more information.

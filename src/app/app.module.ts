@@ -5,18 +5,22 @@ import {createCustomElement} from '@angular/elements';
 
 import {HttpClientModule} from "@angular/common/http";
 
-import {KgTableComponent} from './kg-table/kg-table.component';
-import { KgMapComponent } from './kg-map/kg-map.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatTableModule} from "@angular/material/table";
-import { KgGalleryComponent } from './kg-gallery/kg-gallery.component';
+import {FrontpageComponent} from './frontpage/frontpage.component';
+import {KgTableComponent} from "./components/kg-table/kg-table.component";
+import {KgMapComponent} from "./components/kg-map/kg-map.component";
+import {KgGalleryComponent} from "./components/kg-gallery/kg-gallery.component";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
-  declarations: [KgTableComponent, KgMapComponent, KgGalleryComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule],
+  declarations: [FrontpageComponent, KgGalleryComponent, KgMapComponent, KgTableComponent, FrontpageComponent],
+  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule, MatTabsModule],
   providers: [],
-  entryComponents: [KgTableComponent, KgMapComponent, KgGalleryComponent]
+  entryComponents: [KgTableComponent, KgMapComponent, KgGalleryComponent, FrontpageComponent],
+  bootstrap: [FrontpageComponent]
 })
 export class AppModule {
   constructor(injector: Injector) {
@@ -28,6 +32,9 @@ export class AppModule {
 
     const galleryEl = createCustomElement(KgGalleryComponent, {injector});
     customElements.define('kg-gallery', galleryEl);
+
+    const frontEl = createCustomElement(FrontpageComponent, {injector});
+    customElements.define('app-frontpage', frontEl);
   }
 
   ngDoBootstrap() {
