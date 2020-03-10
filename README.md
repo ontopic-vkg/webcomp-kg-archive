@@ -1,5 +1,7 @@
 # Web Components for Knowledge Graphs 
 
+Live Demo: <https://raw.githack.com/ontopic-vkg/webcomp-kg/master/example/index.html>
+
 
 ## Table of contents
 
@@ -15,6 +17,7 @@
 
 Include the webcompscript files `webcomp-kg.js` and `webcomp-kg.css`  in your HTML and define the web components like below. 
 Three Web Components `<kg-map>`, `<kg-gallery>`, and `<kg-table>` are defined. 
+
 
 ```html
 <body>
