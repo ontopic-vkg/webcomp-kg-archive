@@ -6,12 +6,13 @@
   <link rel="stylesheet" href="webcomp-kg.css">
 </head>
 <body>
-<kg-gallery endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX schema: <http://schema.org/>
+<kg-gallery endpoint='https://sparql.opendatahub.bz.it/sparql'>
+  <query><pre>PREFIX : &lt;http://noi.example.org/ontology/odh#&gt;
+PREFIX geo: &lt;http://www.opengis.net/ont/geosparql#&gt;
+PREFIX schema: &lt;http://schema.org/&gt;
 
 SELECT ?widgetImage ?widgetLabel
-WHERE {
+WHERE &#123;
   ?s a schema:SkiResort ;
      schema:name ?widgetLabel ;
      geo:asWKT ?pos ;
@@ -20,8 +21,7 @@ WHERE {
      schema:isPartOf ?skiRegion.
   ?skiRegion a :SkiRegion ;
      schema:name ?regionName.
-} "
->
+&#125; </pre></query>
 </kg-gallery>
 </body>
 </html>

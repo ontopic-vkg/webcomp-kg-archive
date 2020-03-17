@@ -7,35 +7,35 @@
   <link rel="stylesheet" href="webcomp-kg.css">
 </head>
 <body>
-<kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
-    PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+<kg-map endpoint='https://sparql.opendatahub.bz.it/sparql'>
+  <query><pre>PREFIX schema: &lt;http://schema.org/&gt;
+    PREFIX geo: &lt;http://www.opengis.net/ont/geosparql#&gt;
     SELECT ?h ?pos ?posLabel ?posColor
-    WHERE {
+    WHERE &#123;
     ?h a schema:LodgingBusiness ;
        geo:asWKT ?pos ;
        schema:name ?posLabel ;
        schema:address ?a .
   FILTER (lang(?posLabel) = 'de')
   # Colors
-  OPTIONAL {
+  OPTIONAL &#123;
   ?h a schema:Campground .
   BIND('chlorophyll,0.5' AS ?posColor) # Green
-  }
-  OPTIONAL {
+  &#125;
+  OPTIONAL &#123;
   ?h a schema:BedAndBreakfast .
   BIND('viridis,0.1' AS ?posColor) # Purple
-  }
-  OPTIONAL {
+  &#125;
+  OPTIONAL &#123;
   ?h a schema:Hotel .
   BIND('jet,0.3' AS ?posColor) # Light blue
-  }
-  OPTIONAL {
+  &#125;
+  OPTIONAL &#123;
   ?h a schema:Hostel .
   BIND('jet,0.8' AS ?posColor) # Red
-  }
-  }
-  LIMIT 500"
->
+  &#125;
+  &#125;
+  LIMIT 500</pre></query>
 </kg-map>
 </body>
 </html>

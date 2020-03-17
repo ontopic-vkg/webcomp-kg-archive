@@ -3,20 +3,21 @@ import {FormsModule} from '@angular/forms';
 import {NgModule, Injector} from '@angular/core';
 import {createCustomElement} from '@angular/elements';
 
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
 
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSliderModule} from "@angular/material/slider";
-import {MatTableModule} from "@angular/material/table";
+import {MatSliderModule} from '@angular/material/slider';
+import {MatTableModule} from '@angular/material/table';
 import {FrontpageComponent} from './frontpage/frontpage.component';
-import {KgTableComponent} from "./components/kg-table/kg-table.component";
-import {KgMapComponent} from "./components/kg-map/kg-map.component";
-import {KgGalleryComponent} from "./components/kg-gallery/kg-gallery.component";
-import {MatTabsModule} from "@angular/material/tabs";
+import {KgTableComponent} from './components/kg-table/kg-table.component';
+import {KgMapComponent} from './components/kg-map/kg-map.component';
+import {KgGalleryComponent} from './components/kg-gallery/kg-gallery.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {QueryDirective} from './shared/query.directive';
 
 @NgModule({
-  declarations: [FrontpageComponent, KgGalleryComponent, KgMapComponent, KgTableComponent, FrontpageComponent],
+  declarations: [FrontpageComponent, KgGalleryComponent, KgMapComponent, KgTableComponent, FrontpageComponent, QueryDirective],
   imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule, MatTabsModule],
   providers: [],
   entryComponents: [KgTableComponent, KgMapComponent, KgGalleryComponent, FrontpageComponent],
@@ -34,7 +35,7 @@ export class AppModule {
     customElements.define('kg-gallery', galleryEl);
 
     const frontEl = createCustomElement(FrontpageComponent, {injector});
-    customElements.define('app-frontpage', frontEl);
+    customElements.define('kg-frontpage', frontEl);
   }
 
   ngDoBootstrap() {
