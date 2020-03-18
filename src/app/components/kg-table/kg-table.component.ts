@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {SparqlService} from "../../sparql.service";
 import {Observable} from "rxjs";
 import {SelectResultSet} from "../../../model/sparql";
@@ -7,7 +7,8 @@ import {SelectResultSet} from "../../../model/sparql";
   // tslint:disable-next-line:component-selector
   selector: 'kg-table',
   templateUrl: './kg-table.component.html',
-  styleUrls: ['./kg-table.component.css']
+  styleUrls: ['./kg-table.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class KgTableComponent implements OnInit {
 
