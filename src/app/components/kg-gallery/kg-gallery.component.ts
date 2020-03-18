@@ -6,7 +6,7 @@ import {SparqlService} from "../../sparql.service";
   selector: 'kg-gallery',
   templateUrl: './kg-gallery.component.html',
   styleUrls: ['./kg-gallery.component.css'],
-  //encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class KgGalleryComponent implements OnInit {
   @Input() endpoint: string;

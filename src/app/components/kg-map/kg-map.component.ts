@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {Observable} from "rxjs";
 import {toLonLat, useGeographic} from 'ol/proj';
@@ -20,7 +20,7 @@ import {SelectResultSet} from "../../../model/sparql";
 @Component({
   selector: 'kg-map',
   templateUrl: './kg-map.component.html',
-  styleUrls: ['./kg-map.component.css']
+  styleUrls: ['./kg-map.component.css'],
 })
 export class KgMapComponent implements OnInit {
 
@@ -98,7 +98,7 @@ export class KgMapComponent implements OnInit {
       }
     });
 
-    closer.onclick = function () {
+    closer.onclick = () => {
       overlay.setPosition(undefined);
       closer.blur();
       return false;
@@ -141,7 +141,7 @@ export class KgMapComponent implements OnInit {
         }
     });
 
-    map.on('pointermove', function(event) {
+    map.on('pointermove', (event) => {
       if (map.hasFeatureAtPixel(event.pixel)) {
         map.getViewport().style.cursor = 'pointer';
       } else {

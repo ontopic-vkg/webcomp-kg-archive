@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {SparqlService} from "../../sparql.service";
 import {Observable} from "rxjs";
 import {SelectResultSet} from "../../../model/sparql";
