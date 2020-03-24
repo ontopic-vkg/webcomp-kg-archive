@@ -1,26 +1,23 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-
-import {Observable} from "rxjs";
-import {toLonLat, useGeographic} from 'ol/proj';
+import {Component, Input, OnInit} from '@angular/core';
+import {useGeographic} from 'ol/proj';
 import {Map, Overlay, View} from 'ol';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 
-import {MousePosition, OverviewMap, Zoom, FullScreen} from "ol/control";
-import {Circle, Fill, Style} from "ol/style";
-import {defaults as defaultInteractions, DragPan} from 'ol/interaction';
+import {FullScreen, MousePosition, OverviewMap, Zoom} from 'ol/control';
+import {Circle, Fill, Style} from 'ol/style';
+import {defaults as defaultInteractions} from 'ol/interaction';
 
-import {Point} from "ol/geom";
-import {SparqlService} from "../../sparql.service";
-import {SelectResultSet} from "../../../model/sparql";
-
+import {Point} from 'ol/geom';
+import {SparqlService} from '../../sparql.service';
+import {SelectResultSet} from '../../../model/sparql';
 
 
 @Component({
   selector: 'kg-map',
   templateUrl: './kg-map.component.html',
-  styleUrls: ['./kg-map.component.css'],
+  styleUrls: ['./kg-map.component.css']
 })
 export class KgMapComponent implements OnInit {
 
@@ -32,7 +29,7 @@ export class KgMapComponent implements OnInit {
 
   results: SelectResultSet;
 
-  finished: boolean = false;
+  finished = false;
 
   constructor(private sparqlService: SparqlService) {
 
@@ -47,7 +44,7 @@ export class KgMapComponent implements OnInit {
         this.finished = true;
         this.results = value;
         const features = this.sparqlService.asFeatures(value);
-        //console.log(features);
+        // console.log(features);
         overlay.getSource().addFeatures(features);
       }, error => {
         this.finished = true;
@@ -82,15 +79,15 @@ export class KgMapComponent implements OnInit {
     /**
      * Elements that make up the popup.
      */
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
+    const container = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    const closer = document.getElementById('popup-closer');
 
 
     /**
      * Create an overlay to anchor the popup to the map.
      */
-    var overlay = new Overlay({
+    const overlay = new Overlay({
       element: container,
       autoPan: true,
       autoPanAnimation: {
@@ -104,10 +101,10 @@ export class KgMapComponent implements OnInit {
       return false;
     };
 
-    var map = new Map({
+    const map = new Map({
       interactions: defaultInteractions({
         /* onFocusOnly caused trouble. It has to be disabled */
-        //onFocusOnly: true
+        // onFocusOnly: true
       }),
       target: 'map',
       view: new View({
@@ -129,19 +126,18 @@ export class KgMapComponent implements OnInit {
       ]
     });
 
-    map.on('singleclick', function(evt) {
-      var coordinate = evt.coordinate;
+    map.on('singleclick', (evt) => {
+      let coordinate = evt.coordinate;
 
-      var feature = map.getFeaturesAtPixel(evt.pixel)[0];
-        if (feature) {
-          const coordinate = (feature.getGeometry() as Point).getCoordinates();
-          const label = feature.get('label');
-          content.innerHTML = label;
+      const feature = map.getFeaturesAtPixel(evt.pixel)[0];
+      if (feature) {
+          coordinate = (feature.getGeometry() as Point).getCoordinates();
+          content.innerHTML = feature.get('label');
           overlay.setPosition(coordinate);
         }
     });
 
-    map.on('pointermove', (event) => {
+    map.on('pointermove', event => {
       if (map.hasFeatureAtPixel(event.pixel)) {
         map.getViewport().style.cursor = 'pointer';
       } else {

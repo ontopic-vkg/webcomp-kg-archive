@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SelectResultSet, SolutionMapping, TypedLiteral} from "../model/sparql";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {SelectResultSet, SolutionMapping, TypedLiteral} from '../model/sparql';
 
 import WKT from 'ol/format/WKT';
-import {Feature} from "ol";
-import {Observable} from "rxjs";
-import {Circle, Fill, Style} from "ol/style";
+import {Feature} from 'ol';
+import {Observable} from 'rxjs';
+import {Circle, Fill, Style} from 'ol/style';
 
-import {colorFromString} from "./color-util";
+import {colorFromString} from './color-util';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +21,16 @@ export class SparqlService {
     this._endpoint = value;
   }
 
+  // tslint:disable-next-line:variable-name
   private _endpoint;
 
   constructor(private http: HttpClient) {
   }
 
   select(sparql: string): Observable<SelectResultSet> {
-    const requestBody = "query=" + encodeURIComponent(sparql) +
-      "&Accept=" + encodeURIComponent('application/sparql-results+json');
-    //console.log(requestBody);
+    const requestBody = 'query=' + encodeURIComponent(sparql) +
+      '&Accept=' + encodeURIComponent('application/sparql-results+json');
+    // console.log(requestBody);
     return this.http.post<SelectResultSet>(this._endpoint, requestBody, {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -40,21 +41,21 @@ export class SparqlService {
   asFeatures(results: SelectResultSet): Feature[] {
     const vars = results.head.vars;
     const solutionMappings = results.results.bindings;
-    if (solutionMappings.length == 0) {
+    if (solutionMappings.length === 0) {
       return [];
     }
 
     const m0 = solutionMappings[0];
     let wktVar;
     for (const [varName, value] of Object.entries(m0)) {
-      if ("datatype" in value && value.datatype === "http://www.opengis.net/ont/geosparql#wktLiteral") {
+      if ('datatype' in value && value.datatype === 'http://www.opengis.net/ont/geosparql#wktLiteral') {
         wktVar = varName;
-        break
+        break;
       }
     }
 
-    let labelVar = wktVar + "Label";
-    let colorVar = wktVar + "Color";
+    const labelVar = wktVar + 'Label';
+    const colorVar = wktVar + 'Color';
 
     const wktFormat = new WKT();
 

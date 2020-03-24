@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {SparqlService} from "../../sparql.service";
-import {Observable} from "rxjs";
-import {SelectResultSet} from "../../../model/sparql";
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {SparqlService} from '../../sparql.service';
+import {Observable} from 'rxjs';
+import {SelectResultSet} from '../../../model/sparql';
+
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'kg-table',
   templateUrl: './kg-table.component.html',
   styleUrls: ['./kg-table.component.css'],
@@ -20,7 +20,7 @@ export class KgTableComponent implements OnInit {
 
   results: SelectResultSet;
 
-  finished: boolean = false;
+  finished = false;
 
   constructor(private sparqlService: SparqlService) {}
 

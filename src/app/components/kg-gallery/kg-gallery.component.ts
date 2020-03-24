@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {SelectResultSet} from "../../../model/sparql";
-import {SparqlService} from "../../sparql.service";
+import {SelectResultSet} from '../../../model/sparql';
+import {SparqlService} from '../../sparql.service';
 
 @Component({
   selector: 'kg-gallery',
@@ -17,7 +17,7 @@ export class KgGalleryComponent implements OnInit {
 
   results: SelectResultSet;
 
-  finished: boolean = false;
+  finished = false;
 
   constructor(private sparqlService: SparqlService) { }
 
