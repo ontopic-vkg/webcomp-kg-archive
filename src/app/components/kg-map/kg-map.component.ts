@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {useGeographic} from 'ol/proj';
 import {Map, Overlay, View} from 'ol';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
@@ -17,9 +17,21 @@ import {SelectResultSet} from '../../../model/sparql';
 @Component({
   selector: 'kg-map',
   templateUrl: './kg-map.component.html',
-  styleUrls: ['./kg-map.component.css']
+  styleUrls: ['./kg-map.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
-export class KgMapComponent implements OnInit {
+export class KgMapComponent implements OnInit, AfterViewInit {
+
+  private vectorLayer: VectorLayer;
+  private map: Map;
+  @ViewChild('map', {static: false}) mapChild: ElementRef;
+  @ViewChild('popup', {static: false}) popup: ElementRef;
+  @ViewChild('popupcloser', {static: false}) closer: ElementRef;
+  @ViewChild('popupcontent', {static: false}) content: ElementRef;
+
+  constructor(private sparqlService: SparqlService) {
+
+  }
 
   @Input() endpoint: string;
 
@@ -31,35 +43,14 @@ export class KgMapComponent implements OnInit {
 
   finished = false;
 
-  constructor(private sparqlService: SparqlService) {
+  private createMap() {
 
-  }
-
-  ngOnInit(): void {
-    const overlay = KgMapComponent.createMap();
-
-    this.sparqlService.endpoint = this.endpoint;
-    this.sparqlService.select(this.query)
-      .subscribe(value => {
-        this.finished = true;
-        this.results = value;
-        const features = this.sparqlService.asFeatures(value);
-        // console.log(features);
-        overlay.getSource().addFeatures(features);
-      }, error => {
-        this.finished = true;
-        this.errorMessage = JSON.stringify(error);
-      });
-
-  }
-
-  private static createMap() {
     useGeographic();
 
     // bolzano
     const place = [11.33982, 46.49067];
 
-    const vectorLayer = new VectorLayer({
+    this.vectorLayer = new VectorLayer({
       source: new VectorSource({
         features: []
       }),
@@ -75,14 +66,9 @@ export class KgMapComponent implements OnInit {
       source: new OSM()
     });
 
-
-    /**
-     * Elements that make up the popup.
-     */
-    const container = document.getElementById('popup');
-    const content = document.getElementById('popup-content');
-    const closer = document.getElementById('popup-closer');
-
+    const container = this.popup.nativeElement;
+    const content = this.content.nativeElement;
+    const closer = this.closer.nativeElement;
 
     /**
      * Create an overlay to anchor the popup to the map.
@@ -101,19 +87,19 @@ export class KgMapComponent implements OnInit {
       return false;
     };
 
-    const map = new Map({
+    this.map = new Map({
       interactions: defaultInteractions({
         /* onFocusOnly caused trouble. It has to be disabled */
         // onFocusOnly: true
       }),
-      target: 'map',
+      target: this.mapChild.nativeElement,
       view: new View({
         center: place,
         zoom: 8
       }),
       layers: [
         osmLayer,
-        vectorLayer
+        this.vectorLayer
       ],
       overlays: [
         overlay
@@ -126,25 +112,48 @@ export class KgMapComponent implements OnInit {
       ]
     });
 
-    map.on('singleclick', (evt) => {
+    this.map.on('singleclick', (evt) => {
       let coordinate = evt.coordinate;
 
-      const feature = map.getFeaturesAtPixel(evt.pixel)[0];
+      const feature = this.map.getFeaturesAtPixel(evt.pixel)[0];
       if (feature) {
-          coordinate = (feature.getGeometry() as Point).getCoordinates();
-          content.innerHTML = feature.get('label');
-          overlay.setPosition(coordinate);
-        }
-    });
-
-    map.on('pointermove', event => {
-      if (map.hasFeatureAtPixel(event.pixel)) {
-        map.getViewport().style.cursor = 'pointer';
-      } else {
-        map.getViewport().style.cursor = 'inherit';
+        coordinate = (feature.getGeometry() as Point).getCoordinates();
+        content.innerHTML = feature.get('label');
+        overlay.setPosition(coordinate);
       }
     });
 
-    return vectorLayer;
+    this.map.on('pointermove', event => {
+      if (this.map.hasFeatureAtPixel(event.pixel)) {
+        this.map.getViewport().style.cursor = 'pointer';
+      } else {
+        this.map.getViewport().style.cursor = 'inherit';
+      }
+    });
+
   }
+
+  ngOnInit(): void {
+
+
+  }
+
+  ngAfterViewInit(): void {
+    this.createMap();
+
+    this.sparqlService.endpoint = this.endpoint;
+    this.sparqlService.select(this.query)
+      .subscribe(value => {
+        this.finished = true;
+        this.results = value;
+        const features = this.sparqlService.asFeatures(value);
+        // console.log(features);
+        this.vectorLayer.getSource().addFeatures(features);
+      }, error => {
+        this.finished = true;
+        this.errorMessage = JSON.stringify(error);
+      });
+  }
+
+
 }
