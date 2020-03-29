@@ -21,7 +21,11 @@
     ]
   },
   "configuration": {
-    "tagName": "webcomponent-boilerplate",
-    "options": []
+    "tagName": "webcomp-kg",
+    "options": [
+      "view",
+      "endpoint",
+      "query"
+    ]
   }
 }

@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="webcomp-kg.css">
 </head>
 <body>
-<kg-gallery endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
+<kg-widget view="gallery" endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX schema: <http://schema.org/>
 
@@ -20,8 +20,6 @@ WHERE {
      schema:isPartOf ?skiRegion.
   ?skiRegion a :SkiRegion ;
      schema:name ?regionName.
-} "
->
-</kg-gallery>
+} "></kg-widget>
 </body>
 </html>

@@ -1,6 +1,4 @@
-<!--<mat-tab-group>-->
-<!--  <mat-tab label="KG Gallery">-->
-    <kg-gallery endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
+<kg-widget view="gallery" endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX : <http://noi.example.org/ontology/odh#>
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX schema: <http://schema.org/>
 
@@ -14,12 +12,9 @@ WHERE {
      schema:isPartOf ?skiRegion.
   ?skiRegion a :SkiRegion ;
      schema:name ?regionName.
-} "
-    >
-    </kg-gallery>
-<!--  </mat-tab>-->
-<!--  <mat-tab label="KG Map">-->
-    <kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+} "></kg-widget>
+
+<kg-widget view="table" endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -46,12 +41,8 @@ WHERE {
   BIND('jet,0.8' AS ?posColor) # Red
   }
   }
-  LIMIT 500"
-    >
-    </kg-map>
-<!--  </mat-tab>-->
-<!--  <mat-tab label="KG Table">-->
-    <kg-table endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+  LIMIT 500"></kg-widget>
+<kg-widget view="map" endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -78,8 +69,7 @@ WHERE {
   BIND('jet,0.8' AS ?posColor) # Red
   }
   }
-  LIMIT 500"
-    >
-    </kg-table>
-<!--  </mat-tab>-->
-<!--</mat-tab-group>-->
+  LIMIT 500">
+
+</kg-widget>
+
