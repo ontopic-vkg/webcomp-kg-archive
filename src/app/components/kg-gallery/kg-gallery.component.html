@@ -8,11 +8,15 @@
 
 <div *ngIf="results">
 
-  <div class="imgBlock" *ngFor="let m of results.results.bindings">
-    {{m['widgetLabel'].value}} <br> <img src="{{m['widgetImage'].value}}" width="300px">
-  </div>
+  <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
 
-  <div style="clear:both;"></div>
+
+
+<!--  <div class="imgBlock" *ngFor="let m of results.results.bindings">-->
+<!--    {{m['widgetLabel'].value}} <br> <img src="{{m['widgetImage'].value}}" width="300px">-->
+<!--  </div>-->
+
+<!--  <div style="clear:both;"></div>-->
 
 </div>
 

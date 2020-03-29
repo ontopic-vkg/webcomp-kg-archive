@@ -5,7 +5,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewEncapsulation} 
   selector: 'kg-frontpage',
   templateUrl: './frontpage.component.html',
   styleUrls: ['./frontpage.component.css'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class FrontpageComponent implements OnInit, AfterViewInit {
 
@@ -13,7 +13,7 @@ export class FrontpageComponent implements OnInit, AfterViewInit {
   // @Input() endpoint: string;//  = 'table';
   // @Input() query: string;//  = 'table';
 
-  constructor(private elm: ElementRef) {
+  constructor() {
   }
 
   ngOnInit() {

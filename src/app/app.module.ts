@@ -14,10 +14,11 @@ import {KgTableComponent} from './components/kg-table/kg-table.component';
 import {KgMapComponent} from './components/kg-map/kg-map.component';
 import {KgGalleryComponent} from './components/kg-gallery/kg-gallery.component';
 import {KgWidgetComponent} from "./components/kg-widget/kg-widget.component";
+import {NgImageSliderModule} from "ng-image-slider";
 
 @NgModule({
   declarations: [FrontpageComponent, KgGalleryComponent, KgMapComponent, KgTableComponent, KgWidgetComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatSliderModule, MatTableModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule, NgImageSliderModule],
   entryComponents: [KgTableComponent, KgMapComponent, KgGalleryComponent, FrontpageComponent, KgWidgetComponent],
   providers: [],
   bootstrap: [FrontpageComponent]
