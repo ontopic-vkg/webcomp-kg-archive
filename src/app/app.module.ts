@@ -21,7 +21,7 @@ import {NgImageSliderModule} from 'ng-image-slider';
   providers: [],
   bootstrap: []
 })
-export class AppModule implements DoBootstrap {
+export class AppModule  {
   constructor(private injector: Injector) {
   }
 
