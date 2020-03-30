@@ -20,7 +20,7 @@ export class KgGalleryComponent implements OnInit {
 
   finished = false;
 
-  @ViewChild('nav', {static: false}) slider: NgImageSliderComponent;
+  @ViewChild('nav') slider: NgImageSliderComponent;
 
   imageObject = [];
 

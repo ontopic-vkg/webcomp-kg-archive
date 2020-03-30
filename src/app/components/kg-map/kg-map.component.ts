@@ -24,10 +24,10 @@ export class KgMapComponent implements OnInit, AfterViewInit {
 
   private vectorLayer: VectorLayer;
   private map: Map;
-  @ViewChild('map', {static: false}) mapChild: ElementRef;
-  @ViewChild('popup', {static: false}) popup: ElementRef;
-  @ViewChild('popupcloser', {static: false}) closer: ElementRef;
-  @ViewChild('popupcontent', {static: false}) content: ElementRef;
+  @ViewChild('map') mapChild: ElementRef;
+  @ViewChild('popup') popup: ElementRef;
+  @ViewChild('popupcloser') closer: ElementRef;
+  @ViewChild('popupcontent') content: ElementRef;
 
   constructor(private sparqlService: SparqlService) {
 
