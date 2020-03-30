@@ -5,7 +5,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewEncapsulation} 
   selector: 'kg-frontpage',
   templateUrl: './frontpage.component.html',
   styleUrls: ['./frontpage.component.css'],
-  //encapsulation: ViewEncapsulation.ShadowDom
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class FrontpageComponent implements OnInit, AfterViewInit {
 
@@ -17,7 +17,7 @@ export class FrontpageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //console.log('ngOnInit(): kgview   :', this.elm.nativeElement.getAttribute('kgview'));
+    // console.log('ngOnInit(): kgview   :', this.elm.nativeElement.getAttribute('kgview'));
   }
 
   ngAfterViewInit() {

@@ -22,7 +22,7 @@ export class KgWidgetComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.view = this.elm.nativeElement.getAttribute('view');
     this.endpoint = this.elm.nativeElement.getAttribute('endpoint');
-    this.query = this.elm.nativeElement.getAttribute('query')
+    this.query = this.elm.nativeElement.getAttribute('query');
     //console.log('ngAfterViewInit(): kgview   :', this.elm.nativeElement.getAttribute('kgview'));
   }
 
