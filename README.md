@@ -16,14 +16,14 @@ Live Demo: <https://raw.githack.com/ontopic-vkg/webcomp-kg/master/example/index.
 
 
 Include the webcompscript files `webcomp-kg.js` and `webcomp-kg.css`  in your HTML and define the web components like below. 
-Three Web Components `<kg-map>`, `<kg-gallery>`, and `<kg-table>` are defined. 
+A Web Component `<kg-widget>` with three visualizations (map, table, and image gallery) is defined. 
 
 
 ```html
 <body>
 <script src="webcomp-kg.js"></script>
   <link rel="stylesheet" href="webcomp-kg.css">
-<kg-map endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
+<kg-widget view="map" endpoint='https://sparql.opendatahub.bz.it/sparql' query="PREFIX schema: <http://schema.org/>
     PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?h ?pos ?posLabel ?posColor
     WHERE {
@@ -52,13 +52,21 @@ Three Web Components `<kg-map>`, `<kg-gallery>`, and `<kg-table>` are defined.
   }
   LIMIT 500"
 >
-</kg-map>
+</kg-widget>
 </body>
 ```
 
-Two other We 
+
 
 ### Attributes
+
+#### view
+
+View
+
+Type: string
+
+Possible values: 'map', 'table', 'gallery'
 
 #### endpoint
 
@@ -82,7 +90,7 @@ on your local machine for development and testing purposes.
 
 To build the project, the following prerequisites must be met:
 
-- Node 12 / NPM 6
+- Node 12 
 
 For a ready to use Docker environment with all prerequisites already installed and prepared, you can check out the [Docker environment](#docker-environment) section.
 
@@ -91,7 +99,7 @@ For a ready to use Docker environment with all prerequisites already installed a
 Get a copy of the repository:
 
 ```bash
-ToDo: git clone https://github.com/ontopic-vkg/webcomp-kg.git
+git clone https://github.com/noi-techpark/webcomp-kg
 ```
 
 Change directory:
@@ -113,10 +121,10 @@ npm install
 Build and start the project:
 
 ```bash
-npm run start
+npm run build
 ```
 
-The application will be served and can be accessed at [http://localhost:4200](http://localhost:4200).
+Then you can see the examples at the `examples` directory.
 
 ## Tests and linting
 
@@ -211,4 +219,4 @@ The project uses this boilerplate: [https://github.com/noi-techpark/webcomp-boil
 
 ### License
 
-The code in this project is licensed under the Apache 2 license. See the [LICENSE.md](LICENSE.md) file for more information.
+The code in this project is licensed under the AGPL 3 license. See the [LICENSE.md](LICENSE.md) file for more information.

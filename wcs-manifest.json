@@ -3,11 +3,17 @@
   "description": "A webcomponent for showing info from a Knowledge Graph",
   "descriptionAbstract": "A webcomponent for KG",
   "license": "Apache-2.0",
-  "repositoryUrl": "https://github.com/noi-techpark/webcomp-boilerplate",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-kg",
   "authors": [
     {
       "name": "Guohui Xiao",
       "email": "guohui.xiao@ontopic.biz",
+      "organization": "Ontopic s.r.l.",
+      "organizationUrl": "https://ontop-vkg.org"
+    },
+    {
+      "name": "Sarah Komla-Ebri",
+      "email": "sarah.komlaebri@ontopic.biz",
       "organization": "Ontopic s.r.l.",
       "organizationUrl": "https://ontop-vkg.org"
     }
