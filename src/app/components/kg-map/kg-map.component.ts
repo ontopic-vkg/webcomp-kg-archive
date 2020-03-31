@@ -84,7 +84,7 @@ export class KgMapComponent implements OnInit, AfterViewInit {
 
     closer.onclick = () => {
       overlay.setPosition(undefined);
-      closer.blur();
+      // closer.blur();
       return false;
     };
 

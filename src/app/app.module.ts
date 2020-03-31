@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {DoBootstrap, Injector, NgModule} from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import {createCustomElement} from '@angular/elements';
 
 import {HttpClientModule} from '@angular/common/http';
@@ -19,19 +19,17 @@ import {NgImageSliderModule} from 'ng-image-slider';
   declarations: [FrontpageComponent, KgGalleryComponent, KgMapComponent, KgTableComponent, KgWidgetComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule, NgImageSliderModule],
   providers: [],
-  bootstrap: []
+  // bootstrap: [FrontpageComponent]
 })
 export class AppModule  {
+
   constructor(private injector: Injector) {
+
   }
 
   ngDoBootstrap() {
     const elements: any[] = [
-      // [KgTableComponent, 'kg-table'],
-      // [KgGalleryComponent, 'kg-gallery'],
-      // [KgMapComponent, 'kg-map'],
       [KgWidgetComponent, 'kg-widget'],
-      // [FrontpageComponent, 'kg-frontpage'],
     ];
     for (const [component, name] of elements) {
       const el = createCustomElement(component, {injector: this.injector});
