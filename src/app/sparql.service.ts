@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {Circle, Fill, Style} from 'ol/style';
 
 import {colorFromString} from './color-util';
+import {Geometry} from 'ol/geom';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class SparqlService {
     });
   }
 
-  asFeatures(results: SelectResultSet): Feature[] {
+  asFeatures(results: SelectResultSet): Feature<any>[] {
     const vars = results.head.vars;
     const solutionMappings = results.results.bindings;
     if (solutionMappings.length === 0) {
@@ -62,7 +63,7 @@ export class SparqlService {
     return solutionMappings
       .map((m: SolutionMapping) => {
         const wkt: string = m[wktVar].value;
-        const feature: Feature = wktFormat.readFeature(wkt);
+        const feature = wktFormat.readFeature(wkt);
         if (m[colorVar]) {
           feature.setStyle(new Style({
             image: new Circle({

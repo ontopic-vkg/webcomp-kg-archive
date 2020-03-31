@@ -12,6 +12,7 @@ import {defaults as defaultInteractions} from 'ol/interaction';
 import {Point} from 'ol/geom';
 import {SparqlService} from '../../sparql.service';
 import {SelectResultSet} from '../../../model/sparql';
+import MapBrowserEvent from 'ol/MapBrowserEvent';
 
 
 @Component({
@@ -112,7 +113,7 @@ export class KgMapComponent implements OnInit, AfterViewInit {
       ]
     });
 
-    this.map.on('singleclick', (evt) => {
+    this.map.on('singleclick', (evt: MapBrowserEvent) => {
       let coordinate = evt.coordinate;
 
       const feature = this.map.getFeaturesAtPixel(evt.pixel)[0];
@@ -123,7 +124,7 @@ export class KgMapComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.map.on('pointermove', event => {
+    this.map.on('pointermove', (event: MapBrowserEvent) => {
       if (this.map.hasFeatureAtPixel(event.pixel)) {
         this.map.getViewport().style.cursor = 'pointer';
       } else {
